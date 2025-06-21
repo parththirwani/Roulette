@@ -26,13 +26,13 @@ export enum GameState {
 }
 
 export enum COINS {
-    One,
-    Five,
-    Ten,
-    Twenty,
-    Fifty,
-    Hundred,
-    FiveHundred,
+    One = 1,
+    Five = 5,
+    Ten = 10,
+    Twenty = 20,
+    Fifty = 50,
+    Hundred = 100,
+    FiveHundred = 500,
 }
 
 export enum Number {

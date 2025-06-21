@@ -14,6 +14,7 @@ export class User {
         this.name = name;
         this.ws = ws;
         this.balance = 2500;
+        this.locked = 0;
     }
 
     bet(clientId: string, amount: COINS, betNumber: Number) {
@@ -41,6 +42,6 @@ export class User {
     }
 
     send(payload: outgoingMessage){
-
+        this.ws.send(JSON.stringify(payload));
     }
 }

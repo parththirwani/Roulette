@@ -20,11 +20,7 @@ export class UserManager {
 
     addUser(ws: WebSocket, name: string) {
         const id = ID++;
-        this._users.push(new User({
-             id, 
-             name,
-              ws 
-        }));
+     this._users.push(new User(id, name, ws));;
 
         ws.on('close', () => this.removeUser(id));
     }
@@ -40,4 +36,20 @@ export class UserManager {
             }
         });
     }
+
+    won(id: number, amount: number){
+        this.broadcast({
+            type: "won",
+            clientId: id,
+            amount,
+        },id)
+    }
+
+    lost(id: number, amount: number){
+        this.broadcast({
+            type: "lost",
+            clientId: id,
+            amount,
+        },id)
+}
 }
