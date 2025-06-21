@@ -1,18 +1,30 @@
 import { WebSocket } from 'ws';
-import { User, UserMessage } from './types';
+import { UserMessage } from '../types';
+import { User } from './User';
 
 let ID = 1;
 
 export class UserManager {
-    private _users: User[];
+    private _users: User[] = [];
+    private static _instance: UserManager;
 
-    constructor() {
-        this._users = [];
+    private constructor() {
     }
+
+    public static getInstance(){
+        if (!this._instance){
+            this._instance = new UserManager();
+        }
+        return this._instance
+        }
 
     addUser(ws: WebSocket, name: string) {
         const id = ID++;
-        this._users.push({ id, name, ws });
+        this._users.push(new User({
+             id, 
+             name,
+              ws 
+        }));
 
         ws.on('close', () => this.removeUser(id));
     }
